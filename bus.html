@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Ticket Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 70%;
+            margin: 0 auto;
+        }
+
+        .seat-map {
+            margin-bottom: 20px;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        #seat-map {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .seat {
+            width: 40px;
+            height: 40px;
+            background-color: #ccc;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .seat.selected {
+            background-color: #007bff;
+        }
+
+        #legend {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        #legend span {
+            margin-right: 20px;
+        }
+
+        button {
+            display: block;
+            margin: 0 auto;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #confirmation {
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bus Ticket Booking</h1>
+        <div class="seat-map">
+            <h2>Seat Selection</h2>
+            <div id="seat-map"></div>
+            <div id="legend"></div>
+        </div>
+        <form id="bookingForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br>
+            <label for="destination">Destination:</label>
+            <input type="text" id="destination" name="destination" required><br>
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required><br>
+            <input type="hidden" id="selected-seats" name="selected-seats">
+            <button type="submit">Book Now</button>
+        </form>
+        <div id="confirmation"></div>
+    </div>
+    <script>
+        // Define the seat map
+        const rows = 4;
+        const cols = 17;
+        const seats = [];
+
+        for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < cols; j++) {
+                seats.push(String.fromCharCode(65 + i) + (j + 1));
+            }
+        }
+
+        // Create the seat map UI
+        const seatMap = document.getElementById('seat-map');
+        const legend = document.getElementById('legend');
+
+        seats.forEach(value => {
+            const seatElement = document.createElement('div');
+            seatElement.classList.add('seat');
+            seatElement.textContent = value;
+            seatElement.addEventListener('click', () => {
+                seatElement.classList.toggle('selected');
+                updateSelectedSeats();
+            });
+            seatMap.appendChild(seatElement);
+        });
+
+        // Update selected seats hidden input
+        function updateSelectedSeats() {
+            const selectedSeats = Array.from(document.querySelectorAll('.seat.selected')).map(seat => seat.textContent);
+            document.getElementById('selected-seats').value = selectedSeats.join(',');
+        }
+        //
+
+        // Display seat legend
+        const legendHTML = `
+            <span>Available</span>
+            <div class="seat" style="background-color: #ccc;"></div>
+            <span>Selected</span>
+            <div class="seat selected" style="background-color: #007bff;"></div>
+        `;
+        legend.innerHTML = legendHTML;
+
+        // Form submission
+        document.getElementById('bookingForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const destination = document.getElementById('destination').value;
+            const date = document.getElementById('date').value;
+            const selectedSeats = document.getElementById('selected-seats').value;
+
+            const confirmationMsg = `Booking Confirmed!
+                Name: ${name}
+                Destination: ${destination}
+                Date: ${date}
+                Seats: ${selectedSeats}`;
+
+            document.getElementById('confirmation').textContent = confirmationMsg;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+.container{
+    background-color: rgb(119, 119, 247);
+    height:100%;
+    text-align: center;
+}
+.container h1{
+    padding-top:  20px;
+}
+.seat-map{
+    margin-left: 50px;
+    margin-right: 50px;
+    text-align: center;
+    margin: 30px;
+    margin-top:0px
+}
+.seat-map h2{
+    padding: 20px;
+}
+
+#seat-map{
+    display: grid;
+    grid-template-columns: repeat(17,1fr);
+    justify-content: center;  
+    align-items: center; 
+    margin: 5px;
+    text-align: center;
+}
+.seat{
+    width: 40px;
+    height: 40px;
+    background-color: rgb(70, 70, 70);
+    cursor: pointer;
+    text-align: center;
+    transition: 1s;
+    margin: 5px;
+    border-radius: 10px;
+}
+.seat:hover{
+    box-shadow: 0 0 10px greenyellow;
+}
+.seat.selected{
+    background-color: chartreuse;
+}
+#bookingForm {
+    text-align: center;
+    border: 1px solid black;
+   
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    padding: 20px;
+    margin-left: 25%; 
+    margin-bottom:30px ;
+}
+form input,label{
+    margin-top: 15px;
+    border: none;
+    background-color: transparent;
+    
+}
+form input{
+    border-bottom: 1px solid black;
+}
+input:focus{
+    caret-color: chocolate;
+    outline: none;
+    color:black;
+    font-weight: bolder;
+    background-color: transparent;
+}
+button{
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    background-color: rgb(253, 165, 165);
+    cursor: pointer;
+    border-radius: 15px;
+    
+}
+button:hover{
+    background-color: rgb(8, 8, 8);
+    color: white;
+
+}
+#confirmation{
+    text-align: center;
+    color: rgb(34, 248, 6);
+    height: 50px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+}
